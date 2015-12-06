@@ -76,10 +76,6 @@ uint16_t print_api(uint8_t *buf)
 
 
 void setup(){
-  Serial.begin(9600);
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
   pinMode(POWER_PIN, OUTPUT);
   pinMode(SPEED_PIN, OUTPUT);
   
@@ -93,31 +89,6 @@ void setup(){
   es.ES_init_ip_arp_udp_tcp(mymac,myip, MYWWWPORT);
 }
 
-String getValue(String data, char separator, int index)
-{
-    Serial.println("caca");
-    int maxIndex = data.length()-1;
-    int j=0;
-    String chunkVal = "";
-
-    for(int i=0; i<=maxIndex && j<=index; i++)
-    {
-      chunkVal.concat(data[i]);
-
-      if(data[i]==separator)
-      {
-        j++;
-
-        if(j>index)
-        {
-          chunkVal.trim();
-          return chunkVal;
-        }    
-
-        chunkVal = "";    
-      }  
-    }  
-}
 
 void loop(){
   uint16_t plen, dat_p;
